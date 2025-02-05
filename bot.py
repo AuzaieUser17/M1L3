@@ -12,6 +12,12 @@ bot = commands.Bot(command_prefix='!', intents=intents)  # Buat instance bot den
 async def on_ready():
     print(f'Masuk sebagai {bot.user.name}')  # Menampilkan pesan di konsol tentang keberhasilan masuk ke Discord
 
+@bot.event
+async def on_member_join(member):
+    # Mengirim pesan ucapan selamat
+    for channel in member.guild.text_channels:
+        await channel.send(f'Selamat datang, {member.mention}!')
+
 @bot.command()  # Tentukan perintah "start" yang akan dipanggil setiap kali pengguna memasukkan "!start"
 async def start(ctx):
     await ctx.send("Hai! saya adalah Bot manajer!")  # Mengirim pesan kembali ke ruang obrolan
